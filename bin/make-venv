@@ -1,0 +1,298 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ============================================================================ #
+# make-venv
+#
+# Copyright (C) 2023 Ian Effendi. All rights reserved.
+# Released under the MIT License.
+# https://spdx.org/licenses/MIT.html
+#
+# Author: @rimij405 (Ian Effendi)
+# https://github.com/rimij405
+#
+# Simple script that will create a local virtual environment using the `venv` 
+# python module. Optionally allows users to immediately activate it.
+# ============================================================================ #
+
+# ========================================
+# CONSTANTS / READONLY
+# ========================================
+
+# Script metadata.
+__PROGRAM_NAME="Make Virtual Environment (via venv)"
+__PROGRAM_CMD="make-venv"
+__PROGRAM_VERSION="1.0.0"
+__PROGRAM_ISO_DATE="2023-12-04"
+__COPYRIGHT="
+Copyright (C) 2023 Ian Effendi
+License MIT <https://spdx.org/licenses/MIT.html>
+
+This is free software; you are free to change and distribute it.
+There is NO WARRANTY, to the extent permitted by law.
+"
+
+# Compute values based on this .
+__SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+__PROJECT_DIR="$(realpath "${__SCRIPT_DIR}/..")"
+
+# Secure constants.
+readonly __PROGRAM_NAME 
+readonly __PROGRAM_CMD 
+readonly __PROGRAM_VERSION 
+readonly __PROGRAM_ISO_DATE
+readonly __COPYRIGHT
+readonly __SCRIPT_DIR 
+readonly __PROJECT_DIR
+
+# ========================================
+# INTERNAL VARIABLES
+# ========================================
+
+# Conditionals.
+__VERBOSE=false
+__PRINT_HELP=false
+__PRINT_VERSION=false
+__VENV_EXISTS=false
+__VENV_ACTIVATE=false
+
+# Default values.
+__VENV_NAME="venv"
+__VENV_DIR="$(realpath "${__PROJECT_DIR}/${__VENV_NAME}")"
+
+# ========================================
+# PRIVATE FUNCTIONS
+# ========================================
+
+# Send message to STDERR and exit with an error.
+# 
+# Args:
+#   message: string     The error message to display.
+function die() {
+    printf "%s\n%s\n" \
+    "$*" \
+    "$(out::usage | head --lines=1)" \
+    >&2
+    exit 2
+}
+
+# Display debug associative array.
+#
+# Args:
+#   __CLI_OPTIONS: array      The array of config options.
+function out::options() {
+    # Get associative array by name reference.
+    local -n array=$1
+
+    # Get the column length, or default.
+    local -ir size=${2:-20}
+
+    # Define the printf pattern for rows.
+    local pattern="%-${size}s%s\n"
+
+    # Display header.
+    # shellcheck disable=SC2059
+    printf "${pattern}" "Option" "Value"
+
+    # Display separator.
+    # shellcheck disable=SC2059
+    printf "${pattern}" "------" "-----"
+
+    # Display table contents.
+    for field in "${!array[@]}"
+    do
+        # shellcheck disable=SC2059
+        printf "${pattern}" "${field}" "= ${array[${field}]}"
+    done
+}
+
+# Send copyright information to stdout.
+function out::copyright() {
+    printf "%s" "${__COPYRIGHT}"
+}
+
+# Send version information to stdout.
+function out::version() {
+    printf "%s, version %s%s\n" \
+        "${__PROGRAM_NAME}" \
+        "${__PROGRAM_VERSION}" \
+        "$(out::copyright)"
+}
+
+# Send usage information to stdout.
+function out::usage() {
+    printf "Usage: %s [--name=<NAME>] [--activate] [--help] [--version] [--verbose]
+    %s
+    
+    Arguments:
+        -h, --help              Display this help text.
+        -v, --version           Display script version and build information.
+        -n, --name              Name to assign to the virtual environment. Defaults to 'venv'.
+        -a, --activate          Activate the virtual environment after creating it.
+        -vv, --verbose          Show output of called options.
+
+    This script will create a virtual environment in the current directory.
+    " \
+    "${__PROGRAM_CMD}" \
+    "$(out::version | head --lines=1)"
+}
+
+# Send help text to stdout and then exit.
+function send::help() {
+    printf "%s\n" "$(out::usage)"
+    exit 0
+}
+
+# Install the venv module if it is missing.
+function require::venv() {
+    # Assert venv module is available.
+    # See: https://askubuntu.com/a/588392
+    if ! python -c "import venv" > /dev/null 2>&1; then
+        die "Missing venv module. Are you sure this is the right version of python?"
+    fi
+}
+
+# Check if a directory exists at the specified location.
+#
+# Args:
+#   __CLI_OPTIONS: array      The array of config options.
+function optional::directory() {
+    local -n config=$1
+    local -r output="${config["VENV_DIR"]:-"/path/to/non/existent/directory"}"
+    # If the directory already exists, notify the user.
+    if [ -d "${output}" ]; then
+        echo "Found existing directory."
+    fi
+}
+
+# Create the virtual environment.
+#
+# Args:
+#   __CLI_OPTIONS: array      The array of config options.
+function build::venv() {
+    local -n config=$1
+    local -r output="${config["VENV_DIR"]:?"Missing required virtual environment name."}"
+    printf "%s\n" "Creating virtual environment [${output}]"
+    if [ "${config["VERBOSE"]}" == true ]; then 
+        python -m venv "${output}"
+    else 
+        python -m venv "${output}" > /dev/null 2>&1
+    fi
+}
+
+# Activate the virtual environment.
+#
+# Args:
+#   __CLI_OPTIONS: array      The array of config options.
+function activate::venv() {
+    local -n config=$1
+    local -r output="${config["VENV_DIR"]:?"Cannot activate non-existent environment."}"
+
+    # If already inside the virtual environment, exit early.
+    if [[ "${VIRTUAL_ENV}" == "${output}" ]]; then
+        printf "Already in the virtual environment: %s\n" "${VIRTUAL_ENV}" >&2
+        exit 0
+    fi
+
+    # Not in the virtual environment.
+    printf "Activating the virtual environment %s...\n" "$(basename "${output}")"
+    if [ "${config["VERBOSE"]}" == true ]; then 
+        # shellcheck source=/dev/null
+        source "${output}/bin/activate"
+    else 
+        # shellcheck source=/dev/null
+        source "${output}/bin/activate" > /dev/null 2>&1
+    fi
+}
+
+# ========================================
+# ARGUMENT HANDLING
+# ========================================
+
+# Loop through the short options. Long options are processed by `-`.
+while getopts hvi-: OPT; do
+    # support long options: https://stackoverflow.com/a/28466267/519360
+    if [ "$OPT" = "-" ]; then   # long option: reformulate OPT and OPTARG
+        OPT="${OPTARG%%=*}"       # extract long option name
+        # shellcheck disable=SC2295
+        OPTARG="${OPTARG#$OPT}"   # extract long option argument (may be empty)
+        OPTARG="${OPTARG#=}"      # if long option argument, remove assigning `=`
+    fi
+    # process options.
+    case "$OPT" in
+        vv | verbose )
+            __VERBOSE=true ;;
+        h | help )
+            __PRINT_HELP=true ;;
+        v | version )
+            __PRINT_VERSION=true ;;
+        a | activate)
+            __VENV_ACTIVATE=true ;;
+        n | name)
+            __VENV_NAME="$OPTARG"
+            __VENV_DIR="${__PROJECT_DIR}/${__VENV_NAME}"
+            ;;       
+        \? )
+            # bad short option (error reported via getopts)
+            exit 2 ;;  
+        * )            
+            # bad long option
+            die "Illegal option --$OPT" ;;         
+    esac
+done
+
+# remove parsed options and args from $@ list
+shift $((OPTIND-1))
+
+# Convert argument variables to readonly options array.
+declare -rA __CLI_OPTIONS=( \
+    ['SHOW_HELP']=${__PRINT_HELP} \
+    ['SHOW_VERSION']=${__PRINT_VERSION} \
+    ['VENV_ACTIVATE']=${__VENV_ACTIVATE} \
+    ['VENV_NAME']=${__VENV_NAME} \
+    ['VENV_DIR']=${__VENV_DIR} \
+    ['VERBOSE']=${__VERBOSE} \
+)
+
+# ========================================
+# HELP & VERSION INFORMATION
+# ========================================
+
+# If printing help, do so and exit.
+if [[ ${__CLI_OPTIONS["SHOW_HELP"]} == "true" ]]; then
+    send::help
+fi
+
+# If printing version, do so and exit.
+if [[ ${__CLI_OPTIONS["SHOW_VERSION"]} == "true" ]]; then
+    out::version
+    exit 0
+fi
+
+# ========================================
+# MAKE REQUIREMENTS
+# ========================================
+
+# If printing verbose, output options and then continue normally.
+if [[ ${__CLI_OPTIONS["VERBOSE"]} == "true" ]]; then
+    out::options __CLI_OPTIONS
+fi
+
+# Require venv module.
+require::venv
+
+# Check if optional directory is present.
+if [[ ! $(optional::directory __CLI_OPTIONS) == "Found existing directory." ]]; then 
+    # Build the virtual enviornment.
+    build::venv __CLI_OPTIONS
+fi
+
+# Install packages if option is set.
+if [ "${__CLI_OPTIONS["VENV_ACTIVATE"]}" == "true" ]; then
+    activate::venv __CLI_OPTIONS
+fi
+
+# Notify user process is done.
+echo "Done."
+
+

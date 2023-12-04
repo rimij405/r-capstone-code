@@ -15,7 +15,11 @@ and this project adheres to [Semantic Versioning].
 
 - Add Zenodo DOI and ORCID support.
 - Add `CITATION.cff` for rich citation support in GitHub and Zenodo.
-- Add .gitignore with common rules for [R], [Python], and [Visual Studio Code] contexts.
+- Add .gitignore with common rules for [R], [python], and [Visual Studio Code] contexts.
+- Add python development dependencies: [`pip-tools`], [`cffconvert`], [`pre-commit`].
+- Add `requirements.in` for declaring python development dependencies.
+- Add `requirements.txt` using `pip-sync`.
+- Add `make-venv` script for automating virtual environment setup with the `venv` module.
 
 ### Changed
 
@@ -42,6 +46,11 @@ and this project adheres to [Semantic Versioning].
 [R]: https://cran.r-project.org/
 [Python]: https://www.python.org/
 [Visual Studio Code]: https://code.visualstudio.com/
+
+<!-- Packages -->
+[`pip-tools`]: https://pypi.org/project/pip-tools/
+[`cffconvert`]: https://pypi.org/project/cffconvert/
+[`pre-commit`]: https://pypi.org/project/pre-commit/
 
 <!-- Versions -->
 [unreleased]: https://github.com/rimij405/r-capstone-code/compare/v0.0.2...HEAD
