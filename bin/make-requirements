@@ -14,6 +14,11 @@ set -euo pipefail
 # Simple script that will install `pip-tools` if missing and will invoke
 # `pip-compile` to prepare a `requirements.txt` file with hashes for a
 # reproducible environment.
+#
+# This builds upon the layered python requirements tracking approach laid out
+# by James Bennett.
+#
+# See: https://www.b-list.org/weblog/2022/may/13/boring-python-dependencies/
 # ============================================================================ #
 
 # ========================================
