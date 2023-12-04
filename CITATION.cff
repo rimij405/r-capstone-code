@@ -1,0 +1,40 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: 'R: NYC Housing & Education Prediction Modelling Capstone'
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Ian
+    family-names: Effendi
+    email: iae2784@rit.edu
+    orcid: 'https://orcid.org/0009-0004-9229-206X'
+    affiliation: Rochester Institute of Technology
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.10254058
+    description: >-
+      Project repository containing source code and
+      documentation.
+repository-code: 'https://github.com/rimij405/r-capstone-code'
+abstract: >-
+  R data science project for training and fitting
+  spatio-temporal prediction models on NYC housing and
+  education data.
+keywords:
+  - R
+  - data science
+  - geospatial
+  - temporal
+  - machine learning
+  - housing
+  - education
+  - NYC
+license: MIT
+commit: f208b84267d38de7e5199cb846af348693ff02be
+version: 0.0.1-alpha.1
+date-released: '2023-12-04'
+license-url: https://spdx.org/licenses/MIT.html
