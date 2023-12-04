@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning].
 - Add `requirements.txt` using `pip-sync`.
 - Add `make-venv` script for automating virtual environment setup with the `venv` module.
 - Add `make-requirements` script for automating dependency installation.
+- Add `.pre-commit-config.yaml` configuration file for handling pre-commit hook checks.
 
 ### Changed
 

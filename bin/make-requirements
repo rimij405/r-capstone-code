@@ -12,7 +12,7 @@ set -euo pipefail
 # https://github.com/rimij405
 #
 # Simple script that will install `pip-tools` if missing and will invoke
-# `pip-compile` to prepare a `requirements.txt` file with hashes for a 
+# `pip-compile` to prepare a `requirements.txt` file with hashes for a
 # reproducible environment.
 # ============================================================================ #
 
@@ -38,12 +38,12 @@ __SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 __PROJECT_DIR="$(realpath "${__SCRIPT_DIR}/..")"
 
 # Secure constants.
-readonly __PROGRAM_NAME 
-readonly __PROGRAM_CMD 
-readonly __PROGRAM_VERSION 
+readonly __PROGRAM_NAME
+readonly __PROGRAM_CMD
+readonly __PROGRAM_VERSION
 readonly __PROGRAM_ISO_DATE
 readonly __COPYRIGHT
-readonly __SCRIPT_DIR 
+readonly __SCRIPT_DIR
 readonly __PROJECT_DIR
 
 # ========================================
@@ -65,7 +65,7 @@ __OUTPUT_REQUIREMENTS_FILE="${__PROJECT_DIR}/requirements.txt"
 # ========================================
 
 # Send message to STDERR and exit with an error.
-# 
+#
 # Args:
 #   message: string     The error message to display.
 function die() {
@@ -123,7 +123,7 @@ function out::version() {
 function out::usage() {
     printf "Usage: %s [--file=<INPUT>] [--output=<OUTPUT>] [--install-pkgs] [--help] [--version] [--verbose]
     %s
-    
+
     Arguments:
         -h, --help              Display this help text.
         -v, --version           Display script version and build information.
@@ -180,24 +180,39 @@ function build::requirements() {
     local -r input="${config["REQUIREMENTS.IN"]:-requirements.in}"
     local -r output="${config["REQUIREMENTS.OUT"]:-requirements.txt}"
     printf "%s\n" "Compiling ${input} ==> ${output}..."
-    if [ "${config["VERBOSE"]}" == true ]; then 
+    if [ "${config["VERBOSE"]}" == true ]; then
         pip-compile --strip-extras --generate-hashes "${input}" -o "${output}"
-    else 
+    else
         pip-compile --strip-extras --generate-hashes "${input}" -o "${output}" > /dev/null 2>&1
     fi
 }
 
-# Compile the application requirements.
+# Install the application requirements.
 #
 # Args:
 #   __CLI_OPTIONS: array      The array of config options.
 function install::requirements() {
     local -n config=$1
+
+    # Install the packages.
     printf "Installing packages...\n"
-    if [ "${config["VERBOSE"]}" == true ]; then 
+    if [ "${config["VERBOSE"]}" == true ]; then
         pip-sync
-    else 
+    else
         pip-sync > /dev/null 2>&1
+    fi
+}
+
+# Install the pre-commit requirements.
+function install::pre-commit() {
+    # If a pre-commit configuration is found, install it.
+    printf "Installing pre-commit hooks...\n"
+    local -r previous_location=$(pwd)
+    local -r config="${__PROJECT_DIR}/.pre-commit-config.yaml"
+    if [[ -f ${config} ]]; then
+        cd "${__PROJECT_DIR}"
+        pre-commit install --config "${config}"
+        cd "${previous_location}"
     fi
 }
 
@@ -227,13 +242,13 @@ while getopts hvi-: OPT; do
         f | file)
             __INPUT_REQUIREMENTS_FILE="$OPTARG" ;;
         o | output)
-            __OUTPUT_REQUIREMENTS_FILE="$OPTARG" ;;        
+            __OUTPUT_REQUIREMENTS_FILE="$OPTARG" ;;
         \? )
             # bad short option (error reported via getopts)
-            exit 2 ;;  
-        * )            
+            exit 2 ;;
+        * )
             # bad long option
-            die "Illegal option --$OPT" ;;         
+            die "Illegal option --$OPT" ;;
     esac
 done
 
@@ -286,9 +301,8 @@ build::requirements __CLI_OPTIONS
 # Install packages if option is set.
 if [ "${__CLI_OPTIONS["INSTALL_PKGS"]}" == "true" ]; then
     install::requirements __CLI_OPTIONS
+    install::pre-commit
 fi
 
 # Notify user process is done.
 echo "Done."
-
-
