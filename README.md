@@ -10,7 +10,7 @@ This project would not be possible without the ability to use datasets provided 
 
 If you would like to cite this project, please refer to the following citation:
 
-> Effendi, I. (2023) 
+> Effendi I. (2023). rimij405/r-capstone-code: v0.0.1-alpha.1 - Initial Release (v0.0.1). Zenodo. https://doi.org/10.5281/zenodo.10254057
 
 
 ```bibtex

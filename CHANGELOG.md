@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning].
 - Add `requirements.in` for declaring python development dependencies.
 - Add `requirements.txt` using `pip-sync`.
 - Add `make-venv` script for automating virtual environment setup with the `venv` module.
+- Add `make-requirements` script for automating dependency installation.
 
 ### Changed
 
