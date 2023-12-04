@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning].
 
 - Add Zenodo DOI and ORCID support.
 - Add `CITATION.cff` for rich citation support in GitHub and Zenodo.
+- Add .gitignore with common rules for [R], [Python], and [Visual Studio Code] contexts.
 
 ### Changed
 
@@ -28,7 +29,7 @@ and this project adheres to [Semantic Versioning].
 
 <!-- ### Security -->
 
-## [0.0.1-alpha.1] - 2023-12-04
+## [0.0.1] - 2023-12-04
 
 - Initial release.
 
@@ -38,8 +39,11 @@ and this project adheres to [Semantic Versioning].
 <!-- External Links -->
 [keep a changelog]: https://keepachangelog.com/en/1.0.0/
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
+[R]: https://cran.r-project.org/
+[Python]: https://www.python.org/
+[Visual Studio Code]: https://code.visualstudio.com/
 
 <!-- Versions -->
 [unreleased]: https://github.com/rimij405/r-capstone-code/compare/v0.0.2...HEAD
 [0.0.2]: https://github.com/rimij405/r-capstone-code/compare/v0.0.1...v0.0.2
-[0.0.1-alpha.1]: https://github.com/rimij405/r-capstone-code/releases/tag/v0.0.1
+[0.0.1]: https://github.com/rimij405/r-capstone-code/releases/tag/v0.0.1
