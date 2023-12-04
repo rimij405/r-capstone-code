@@ -11,7 +11,7 @@ set -euo pipefail
 # Author: @rimij405 (Ian Effendi)
 # https://github.com/rimij405
 #
-# Simple script that will create a local virtual environment using the `venv` 
+# Simple script that will create a local virtual environment using the `venv`
 # python module. Optionally allows users to immediately activate it.
 # ============================================================================ #
 
@@ -37,12 +37,12 @@ __SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 __PROJECT_DIR="$(realpath "${__SCRIPT_DIR}/..")"
 
 # Secure constants.
-readonly __PROGRAM_NAME 
-readonly __PROGRAM_CMD 
-readonly __PROGRAM_VERSION 
+readonly __PROGRAM_NAME
+readonly __PROGRAM_CMD
+readonly __PROGRAM_VERSION
 readonly __PROGRAM_ISO_DATE
 readonly __COPYRIGHT
-readonly __SCRIPT_DIR 
+readonly __SCRIPT_DIR
 readonly __PROJECT_DIR
 
 # ========================================
@@ -65,7 +65,7 @@ __VENV_DIR="$(realpath "${__PROJECT_DIR}/${__VENV_NAME}")"
 # ========================================
 
 # Send message to STDERR and exit with an error.
-# 
+#
 # Args:
 #   message: string     The error message to display.
 function die() {
@@ -123,7 +123,7 @@ function out::version() {
 function out::usage() {
     printf "Usage: %s [--name=<NAME>] [--activate] [--help] [--version] [--verbose]
     %s
-    
+
     Arguments:
         -h, --help              Display this help text.
         -v, --version           Display script version and build information.
@@ -173,9 +173,9 @@ function build::venv() {
     local -n config=$1
     local -r output="${config["VENV_DIR"]:?"Missing required virtual environment name."}"
     printf "%s\n" "Creating virtual environment [${output}]"
-    if [ "${config["VERBOSE"]}" == true ]; then 
+    if [ "${config["VERBOSE"]}" == true ]; then
         python -m venv "${output}"
-    else 
+    else
         python -m venv "${output}" > /dev/null 2>&1
     fi
 }
@@ -196,10 +196,10 @@ function activate::venv() {
 
     # Not in the virtual environment.
     printf "Activating the virtual environment %s...\n" "$(basename "${output}")"
-    if [ "${config["VERBOSE"]}" == true ]; then 
+    if [ "${config["VERBOSE"]}" == true ]; then
         # shellcheck source=/dev/null
         source "${output}/bin/activate"
-    else 
+    else
         # shellcheck source=/dev/null
         source "${output}/bin/activate" > /dev/null 2>&1
     fi
@@ -231,13 +231,13 @@ while getopts hvi-: OPT; do
         n | name)
             __VENV_NAME="$OPTARG"
             __VENV_DIR="${__PROJECT_DIR}/${__VENV_NAME}"
-            ;;       
+            ;;
         \? )
             # bad short option (error reported via getopts)
-            exit 2 ;;  
-        * )            
+            exit 2 ;;
+        * )
             # bad long option
-            die "Illegal option --$OPT" ;;         
+            die "Illegal option --$OPT" ;;
     esac
 done
 
@@ -282,7 +282,7 @@ fi
 require::venv
 
 # Check if optional directory is present.
-if [[ ! $(optional::directory __CLI_OPTIONS) == "Found existing directory." ]]; then 
+if [[ ! $(optional::directory __CLI_OPTIONS) == "Found existing directory." ]]; then
     # Build the virtual enviornment.
     build::venv __CLI_OPTIONS
 fi
@@ -294,5 +294,3 @@ fi
 
 # Notify user process is done.
 echo "Done."
-
-
