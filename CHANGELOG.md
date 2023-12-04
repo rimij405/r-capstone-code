@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning].
 
 - Add Zenodo DOI and ORCID support.
 - Add `CITATION.cff` for rich citation support in GitHub and Zenodo.
+- Add `CITATION` file in the [BibTeX] format.
+  - Generated using: `cffconvert -o CITATION -f bibtex`.
 - Add .gitignore with common rules for [R], [python], and [Visual Studio Code] contexts.
 - Add python development dependencies: [`pip-tools`], [`cffconvert`], [`pre-commit`].
 - Add `requirements.in` for declaring python development dependencies.
@@ -22,6 +24,7 @@ and this project adheres to [Semantic Versioning].
 - Add `make-venv` script for automating virtual environment setup with the `venv` module.
 - Add `make-requirements` script for automating dependency installation.
 - Add `.pre-commit-config.yaml` configuration file for handling pre-commit hook checks.
+- Add pre-commit validation of `CITATION.cff` files.
 
 ### Changed
 
@@ -45,6 +48,7 @@ and this project adheres to [Semantic Versioning].
 <!-- External Links -->
 [keep a changelog]: https://keepachangelog.com/en/1.0.0/
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
+[BibTeX]: https://www.bibtex.org/
 [R]: https://cran.r-project.org/
 [Python]: https://www.python.org/
 [Visual Studio Code]: https://code.visualstudio.com/
