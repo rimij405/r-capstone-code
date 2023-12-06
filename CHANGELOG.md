@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning].
 
 - /
 
-## [0.0.2] - 2023-12-04
+## [0.0.2] - 2023-12-05
 
 ### Added
 
@@ -33,14 +33,6 @@ and this project adheres to [Semantic Versioning].
 
 - Updated [README.md].
 
-<!-- ### Deprecated -->
-
-<!-- ### Removed -->
-
-<!-- ### Fixed -->
-
-<!-- ### Security -->
-
 ## [0.0.1] - 2023-12-04
 
 - Initial release.
@@ -63,5 +55,5 @@ and this project adheres to [Semantic Versioning].
 
 <!-- Versions -->
 [unreleased]: https://github.com/rimij405/r-capstone-code/compare/v0.0.2...HEAD
-[0.0.2]: https://github.com/rimij405/r-capstone-code/compare/v0.0.1...v0.0.2
-[0.0.1]: https://github.com/rimij405/r-capstone-code/releases/tag/v0.0.1
+[0.0.2]: https://github.com/rimij405/r-capstone-code/compare/v0.0.1-alpha.1...v0.0.2
+[0.0.1]: https://github.com/rimij405/r-capstone-code/releases/tag/v0.0.1-alpha.1
