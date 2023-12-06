@@ -1,0 +1,22 @@
+Package: RITDSCI799CapstoneIAE2784
+Title: R Housing & Education Data Analysis
+Version: 0.0.2
+Authors@R:
+    person("Ian", "Effendi",
+        email = "effendiian@gmail.com",
+        role = c("aut", "cre"),
+        comment = c(ORCID = "0009-0004-9229-206X"))
+Description: This package bundles the analysis and visualization scripts
+    used to process the datasets included for the DSCI 799 capstone project
+    for creating predictive models. Datasets must be obtained through external
+    sources.
+License: MIT + file LICENSE + file LICENSE-DOCS
+URL: https://github.com/rimij405/r-capstone-code
+BugReports: https://github.com/rimij405/r-capstone-code/issues
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+SystemRequirements: python >= 3.12.0 https://www.python.org/downloads/release/python-3120/
