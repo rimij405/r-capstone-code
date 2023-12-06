@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning].
 - Add `.pre-commit-config.yaml` configuration file for handling pre-commit hook checks.
 - Add pre-commit validation of `CITATION.cff` files.
 - Add pre-commit validation of `*.R` files.
+- Add Visual Studio Code `settings.json` for shareable IDE configuration.
 
 ### Changed
 
