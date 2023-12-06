@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning].
 - Add pre-commit validation of `CITATION.cff` files.
 - Add pre-commit validation of `*.R` files.
 - Add Visual Studio Code `settings.json` for shareable IDE configuration.
+- Add [`radian`] terminal for R debugging.
 
 ### Changed
 
