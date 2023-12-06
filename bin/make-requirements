@@ -184,11 +184,13 @@ function build::requirements() {
     local -n config=$1
     local -r input="${config["REQUIREMENTS.IN"]:-requirements.in}"
     local -r output="${config["REQUIREMENTS.OUT"]:-requirements.txt}"
+
+    # Compile the file.
     printf "%s\n" "Compiling ${input} ==> ${output}..."
     if [ "${config["VERBOSE"]}" == true ]; then
-        pip-compile --strip-extras --generate-hashes "${input}" -o "${output}"
+        pip-compile --strip-extras --generate-hashes --no-annotate --no-header "${input}" -o "${output}"
     else
-        pip-compile --strip-extras --generate-hashes "${input}" -o "${output}" > /dev/null 2>&1
+        pip-compile --strip-extras --generate-hashes --no-annotate --no-header "${input}" -o "${output}" > /dev/null 2>&1
     fi
 }
 
