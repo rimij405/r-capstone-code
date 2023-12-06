@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning].
 - Add `make-requirements` script for automating dependency installation.
 - Add `.pre-commit-config.yaml` configuration file for handling pre-commit hook checks.
 - Add pre-commit validation of `CITATION.cff` files.
+- Add pre-commit validation of `*.R` files.
 
 ### Changed
 
