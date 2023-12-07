@@ -27,7 +27,7 @@ use_extdata <- function(extdata_file = NULL,
     utils$check_errs(c(e1, e2)) # nolint: object_usage_linter.
 
     # Get the input file path.
-    input_path <- tools$file_path_as_absolute(extdata_file)
+    input_path <- tools$file_path_as_absolute(extdata_file) # nolint: object_usage_linter line_length_linter
 
     # Get the output file path.
     output_path <- file.path(output_dir, output_basename)
@@ -40,7 +40,7 @@ use_extdata <- function(extdata_file = NULL,
     )
 
     # Get the absolute file path to the copied file.
-    output_file <- tools$file_path_as_absolute(output_path)
+    output_file <- tools$file_path_as_absolute(output_path) # nolint: object_usage_linter line_length_linter
 
     # Return the name.
     return(output_file)
