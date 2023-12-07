@@ -5,8 +5,13 @@
 # See https://books.ropensci.org/targets/hpc.html
 # to learn about your options.
 
+# Source the `.Rprofile`.
+dir_root <- Sys.getenv("PROJECT_DIR")
+profile <- file.path(dir_root, ".Rprofile")
+source(profile, local = TRUE)
+
 # Set the script path.
-box::set_script_path(file.path(getwd(), "DSCI799CapstoneIAE2784"))
+box::set_script_path(Sys.getenv("PROJECT_DIR"))
 
 # Load modules required to define the pipeline:
 box::use(targets = targets[
