@@ -24,7 +24,7 @@ output <- do.call(targets$tar_visnetwork, options)
 
 # Create the output path name.
 output_timestamp <- format(Sys.time(), "%Y-%m-%dT%H_%M")
-output_basename <- Sys.getenv("VISNETWORK_GRAPH", "visnetwork-graph")
+output_basename <- Sys.getenv("VISNETWORK_GRAPH_TITLE", "visnetwork-graph")
 output_ext <- ".html"
 output_path <- paste(
     output_basename,
