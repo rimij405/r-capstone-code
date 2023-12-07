@@ -20,3 +20,4 @@ repos:
     -   id: parsable-R
     -   id: use-tidy-description
     -   id: style-files
+        args: [ --strict=FALSE, --indent_by=4 ]

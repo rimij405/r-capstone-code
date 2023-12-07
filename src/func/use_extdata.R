@@ -15,30 +15,30 @@ use_extdata <- function(extdata_file = NULL,
                         output_dir = "data/raw",
                         output_basename = basename(extdata_file),
                         options = list(
-                          overwrite = TRUE,
-                          copy.mode = TRUE
+                            overwrite = TRUE,
+                            copy.mode = TRUE
                         )) {
-  # Assert no errors.
-  e1 <- ifelse(is.null(extdata_file), "Missing source file reference.", NULL)
-  e2 <- ifelse(is.null(output_dir), "Missing output directory.", NULL)
-  utils$check_errs(c(e1, e2)) # nolint: object_usage_linter.
+    # Assert no errors.
+    e1 <- ifelse(is.null(extdata_file), "Missing source file reference.", NULL)
+    e2 <- ifelse(is.null(output_dir), "Missing output directory.", NULL)
+    utils$check_errs(c(e1, e2)) # nolint: object_usage_linter.
 
-  # Get the input file path.
-  input_path <- tools$file_path_as_absolute(extdata_file)
+    # Get the input file path.
+    input_path <- tools$file_path_as_absolute(extdata_file)
 
-  # Get the output file path.
-  output_path <- file.path(output_dir, output_basename)
+    # Get the output file path.
+    output_path <- file.path(output_dir, output_basename)
 
-  # Perform the copy.
-  file.copy(
-    input_path,
-    output_path,
-    options
-  )
+    # Perform the copy.
+    file.copy(
+        input_path,
+        output_path,
+        options
+    )
 
-  # Get the absolute file path to the copied file.
-  output_file <- tools$file_path_as_absolute(output_path)
+    # Get the absolute file path to the copied file.
+    output_file <- tools$file_path_as_absolute(output_path)
 
-  # Return the name.
-  return(output_file)
+    # Return the name.
+    return(output_file)
 }

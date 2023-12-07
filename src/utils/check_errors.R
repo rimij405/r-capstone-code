@@ -9,14 +9,14 @@
 #'
 #' @export
 check_errors <- function(e = c(), ctx = NULL) {
-  # Get the context.
-  name <- ifelse(is.null(ctx), deparse(sys.call(-1)[[1]]), ctx)
+    # Get the context.
+    name <- ifelse(is.null(ctx), deparse(sys.call(-1)[[1]]), ctx)
 
-  # If errors list is non-empty, fail validation check.
-  if (length(e) > 0) {
-    stop(paste("\n >", name, "-", unlist(e)), call. = FALSE)
-  }
+    # If errors list is non-empty, fail validation check.
+    if (length(e) > 0) {
+        stop(paste("\n >", name, "-", unlist(e)), call. = FALSE)
+    }
 
-  # Return zero.
-  invisible(0)
+    # Return zero.
+    invisible(0)
 }
