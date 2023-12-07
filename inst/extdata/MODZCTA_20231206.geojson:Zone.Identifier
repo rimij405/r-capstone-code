@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://data.cityofnewyork.us/Health/Modified-Zip-Code-Tabulation-Areas-MODZCTA-/pri4-ifjk
+HostUrl=https://data.cityofnewyork.us/api/geospatial/pri4-ifjk?date=20231206&accessType=DOWNLOAD&method=export&format=GeoJSON

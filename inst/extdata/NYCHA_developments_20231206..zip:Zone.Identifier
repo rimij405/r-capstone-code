@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://data.cityofnewyork.us/Housing-Development/Map-of-NYCHA-Developments/i9rv-hdr5
+HostUrl=https://data.cityofnewyork.us/api/geospatial/i9rv-hdr5?method=export&format=Shapefile
