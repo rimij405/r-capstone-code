@@ -20,12 +20,12 @@ Contains the raw data files. This document explains the source of each.
 
 ## Geospatial Datasets
 
-| Scope   | Title                                                      | Format  | Dataset                                               |
-|---------|------------------------------------------------------------|---------|-------------------------------------------------------|
-| Spatial | [Modified Zip Code Tabulation Areas (MODZCTA)] (Shapefile) | ZIP     | [MODZCTA_20231206.zip:Zone.Identifier]                |
-| Spatial | [Modified Zip Code Tabulation Areas (MODZCTA)] (GeoJSON)   | GeoJSON | [MODZCTA_20231206.geojson:Zone.Identifier]            |
-| Spatial | [Map of NYCHA Developments] (Shapefile)                    | ZIP     | [NYCHA_developments_20231206.zip:Zone.Identifier]     |
-| Spatial | [Map of NYCHA Developments] (GeoJSON)                      | GeoJSON | [NYCHA_developments_20231206.geojson:Zone.Identifier] |
+| Scope   | Title                                                      | Format  | Dataset                               |
+|---------|------------------------------------------------------------|---------|---------------------------------------|
+| Spatial | [Modified Zip Code Tabulation Areas (MODZCTA)] (Shapefile) | ZIP     | [MODZCTA_20231206.zip]                |
+| Spatial | [Modified Zip Code Tabulation Areas (MODZCTA)] (GeoJSON)   | GeoJSON | [MODZCTA_20231206.geojson]            |
+| Spatial | [Map of NYCHA Developments] (Shapefile)                    | ZIP     | [NYCHA_developments_20231206.zip]     |
+| Spatial | [Map of NYCHA Developments] (GeoJSON)                      | GeoJSON | [NYCHA_developments_20231206.geojson] |
 
 <!-- EXTERNAL LINKS -->
 [NYCHA Residential Addresses]: https://data.cityofnewyork.us/Housing-Development/NYCHA-Residential-Addresses/3ub5-4ph8
@@ -38,13 +38,13 @@ Contains the raw data files. This document explains the source of each.
 [Map of NYCHA Developments]: https://data.cityofnewyork.us/Housing-Development/Map-of-NYCHA-Developments/i9rv-hdr5
 
 <!-- DATASET LINKS -->
-[NYCHA_Residential_Addresses_20231206.csv]: inst/extdata/NYCHA_Residential_Addresses_20231206.csv:Zone.Identifier
-[Zip_zori_uc_sfrcondomfr_sm_month.csv]: inst/extdata/Zip_zori_uc_sfrcondomfr_sm_month.csv:Zone.Identifier
-[medianAskingRent_All.zip]: inst/extdata/medianAskingRent_All.zip:Zone.Identifier
-[vacant_puf_21.csv]: inst/extdata/vacant_puf_21.csv:Zone.Identifier
-[schma.zip]: inst/extdata/schma.zip:Zone.Identifier
-[2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx]: inst/extdata/2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx:Zone.Identifier
-[MODZCTA_20231206.zip:Zone.Identifier]: inst/extdata/MODZCTA_20231206.zip:Zone.Identifier
-[MODZCTA_20231206.geojson:Zone.Identifier]: inst/extdata/MODZCTA_20231206.geojson:Zone.Identifier
-[NYCHA_developments_20231206.zip:Zone.Identifier]: inst/extdata/NYCHA_developments_20231206.zip:Zone.Identifier
-[NYCHA_developments_20231206.geojson:Zone.Identifier]: inst/extdata/NYCHA_developments_20231206.geojson:Zone.Identifier
+[NYCHA_Residential_Addresses_20231206.csv]: NYCHA_Residential_Addresses_20231206.csv%3AZone.Identifier
+[Zip_zori_uc_sfrcondomfr_sm_month.csv]: Zip_zori_uc_sfrcondomfr_sm_month.csv%3AZone.Identifier
+[medianAskingRent_All.zip]: medianAskingRent_All.zip%3AZone.Identifier
+[vacant_puf_21.csv]: vacant_puf_21.csv%3AZone.Identifier
+[schma.zip]: schma.zip%3AZone.Identifier
+[2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx]: 2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx%3AZone.Identifier
+[MODZCTA_20231206.zip]: MODZCTA_20231206.zip%3AZone.Identifier
+[MODZCTA_20231206.geojson]: MODZCTA_20231206.geojson%3AZone.Identifier
+[NYCHA_developments_20231206.zip]: NYCHA_developments_20231206.zip%3AZone.Identifier
+[NYCHA_developments_20231206.geojson]: NYCHA_developments_20231206.geojson%3AZone.Identifier
