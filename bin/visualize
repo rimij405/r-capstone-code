@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Generate visualization
+vis_path="$(bin/make-visualization 2>&1 | tail -1)"
+
+# Show the generated path.
+echo "Previewing ${vis_path}..."
+
+# Open.
+open "${vis_path}"

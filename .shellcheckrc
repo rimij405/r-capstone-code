@@ -1,0 +1,2 @@
+# shellcheck config
+external-sources=true

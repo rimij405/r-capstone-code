@@ -5,6 +5,17 @@
 # See https://books.ropensci.org/targets/hpc.html
 # to learn about your options.
 
-targets::tar_make()
-# targets::tar_make_clustermq(workers = 2) # nolint
-# targets::tar_make_future(workers = 2) # nolint
+# Set the script path.
+box::set_script_path(file.path(getwd(), "DSCI799CapstoneIAE2784"))
+
+# Load modules required to define the pipeline:
+box::use(targets = targets[
+    tar_make,
+    tar_make_clustermq,
+    tar_make_future
+])
+
+# Execute the pipeline in the local context.
+tar_make(callr_function = NULL)
+# tar_make_clustermq(workers = 2) # nolint
+# tar_make_future(workers = 2) # nolint

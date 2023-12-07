@@ -1,0 +1,50 @@
+#!/usr/bin/env Rscript
+
+# This is a helper script to generate a visualization network graph.
+# Choose how to execute the pipeline below.
+# See https://books.ropensci.org/targets/hpc.html
+# to learn about your options.
+
+# Load the targets and visNetwork modules.
+box::use(
+    targets = targets[tar_visnetwork],
+    network = visNetwork[visSave]
+)
+
+# Define options for the network graph.
+options <- list(
+    outdated = TRUE,
+    zoom_speed = 2,
+    physics = TRUE
+)
+
+# Create the graph.
+print("Generating the graph...")
+output <- do.call(targets$tar_visnetwork, options)
+
+# Create the output path name.
+output_timestamp <- format(Sys.time(), "%Y-%m-%dT%H_%M")
+output_basename <- Sys.getenv("VISNETWORK_GRAPH", "visnetwork-graph")
+output_ext <- ".html"
+output_path <- paste(
+    output_basename,
+    "[", output_timestamp, "]",
+    output_ext,
+    sep = ""
+)
+
+# Get the full filepath.
+output_path <- file.path("_targets/reports/", output_path)
+
+# Save the graph.
+print(paste("Saving the graph to:", output_path))
+network$visSave(graph = output, file = output_path)
+
+# Check if missing.
+if (! file.exists(output_path)) {
+    stop("Failed to generate the file.")
+    return(NULL)
+}
+
+# Echo the name of the file.
+message(output_path)

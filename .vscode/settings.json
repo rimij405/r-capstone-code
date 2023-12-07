@@ -13,5 +13,10 @@
         "config",
         "docs",
         "package"
-    ]
+    ],
+    "editor.tokenColorCustomizations": {
+        "textMateRules": []
+    },
+    "python.terminal.activateEnvironment": false,
+    "python.terminal.activateEnvInCurrentTerminal": false
 }

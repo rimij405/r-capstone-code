@@ -6,7 +6,6 @@
 # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
 # * https://testthat.r-lib.org/articles/special-files.html
 
-library(testthat)
-library(RITDSCI799CapstoneIAE2784)
+box::use(tt = testthat[...])
 
-test_check("RITDSCI799CapstoneIAE2784")
+tt$test_local("./..")

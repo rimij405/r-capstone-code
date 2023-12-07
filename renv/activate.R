@@ -1,4 +1,4 @@
-
+ # nolint start
 local({
 
   # the requested version of renv
@@ -1178,3 +1178,4 @@ local({
   invisible()
 
 })
+# nolint end

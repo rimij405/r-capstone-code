@@ -1,4 +1,4 @@
-Package: RITDSCI799CapstoneIAE2784
+Package: private
 Title: R Housing & Education Data Analysis
 Version: 0.0.2
 Authors@R:
@@ -24,4 +24,10 @@ SystemRequirements: python >= 3.12.0 https://www.python.org/downloads/release/py
 Depends:
     R (>= 4.3.0)
 Imports:
-    targets
+    here,
+    qs,
+    tarchetypes,
+    targets,
+    tibble,
+    tidyr,
+    zipcodeR

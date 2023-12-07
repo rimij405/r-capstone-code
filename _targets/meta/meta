@@ -1,4 +1,21 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|192e3abaec7d64a5|||||||||||||||
-data|stem|0d3f14a3a96b3ff8|43fae4011a0626f4|ef46db3751d8e999|1588979285||t19697.9230297838s|d07e2e962de596ec|1750|rds|local|vector|||0.006||
-model|stem|1636c25df1da2510|ae83bc723fe2997c|5d1b10f263532bdf|1816327236||t19697.9230298995s|4bab66ba4bee4440|108|rds|local|vector|||0.003||
+.Random.seed|object|f62328c8c5ea3c5f|||||||||||||||
+assert_noerr|function|d21402c5dcedf1d3|||||||||||||||
+copy_target|function|80fefed36f29fc41|||||||||||||||
+define_targets.extdata|function|51b1a1551716105d|||||||||||||||
+define_targets.rawdata|function|028d4facdb5694de|||||||||||||||
+example|stem|3ac63b0535e6001e|be2eb69f3de11477|ef46db3751d8e999|822529522||t19698.201841161s|506f9f6b3747f807|42|qs|local|vector|||0||
+move_file|function|2d1254181950b91f|||||||||||||||
+rawdata_regents|stem|ebeac725952fa2ed|d56f11e24ef4979c|0a9fab005f2d2edc|189486824|/home/mochi/projects/dsci/RITDSCI799CapstoneIAE2784/data/raw/regents.xlsx|t19698.2297225697s||51697260|file|local|vector|||0.001|x is NULL so the result will be NULL|replacement has length zero
+targets|object|3540d0ff80133f3c|||||||||||||||
+tools|object|e1102fe28ecbc327|||||||||||||||
+unzip_file|function|121d1d5869cbc89b|||||||||||||||
+uri_modzcta|stem|6c7c672f177930f4|6ce3999799c08c35|ef46db3751d8e999|2063374527||t19698.2122754386s|dff9495c51b724c1|77|qs|local|vector|||0||
+uri_nycha_address|stem|2ece577501005fc6|f34857ff0218e9c0|ef46db3751d8e999|-1052085783||t19698.2122754386s|17e1813002340629|93|qs|local|vector|||0||
+uri_nycha_developments|stem|dd7eb5819c036404|40f7b6102e4e9637|ef46db3751d8e999|726584385||t19698.2122754386s|bb4e721372eac6a0|88|qs|local|vector|||0||
+uri_regents|stem|20044d04b42ea90e|e59c1e25d504c432|ef46db3751d8e999|-2100170249||t19698.2122753229s|4bab66ba4bee4440|108|qs|local|vector|||0||
+uri_schma|stem|03e4fc31c2137713|01ca0b1ff5757b92|ef46db3751d8e999|2051256851||t19698.2122754386s|8a2d295a6f6be5b7|61|qs|local|vector|||0||
+uri_streeteasy_rents|stem|7f02435cf28831df|592b872f06c5d201|ef46db3751d8e999|-639078032||t19698.2122753229s|dff9495c51b724c1|77|qs|local|vector|||0||
+uri_vacany|stem|a63959d245271431|32c1a997fea566c0|ef46db3751d8e999|1302698956||t19698.2122754386s|991ef619886270ed|69|qs|local|vector|||0||
+uri_zillow_index|stem|8cc0e3ec15b0181d|7816448760936d44|ef46db3751d8e999|1785831611||t19698.2122754386s|1701aa42bd45be76|89|qs|local|vector|||0||
+utils|object|cbc7641032db6001|||||||||||||||
