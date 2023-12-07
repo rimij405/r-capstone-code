@@ -1,8 +1,0 @@
-_targets.R
-CHANGELOG.md
-CITATION
-CITATION.cff
-extdata/*
-
-!extdata/README.md
-!extdata/*Zone.Identifier

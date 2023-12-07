@@ -190,6 +190,16 @@ cython_debug/
 # RStudio files
 .Rproj.user/
 
+# Data
+data/external/*
+data/raw/*
+data/processed/*
+data/interim/*
+
+!data/external/README.md
+!data/external/*Zone.Identifier
+
+
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
