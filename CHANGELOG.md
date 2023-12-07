@@ -7,7 +7,19 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
-- /
+### Added
+
+- Add `extdata` directory for raw data files.
+
+<!-- ### Changed -->
+
+<!-- ### Deprecated -->
+
+<!-- ### Removed -->
+
+<!-- ### Fixed -->
+
+<!-- ### Security -->
 
 ## [0.0.2] - 2023-12-05
 
@@ -55,5 +67,9 @@ and this project adheres to [Semantic Versioning].
 
 <!-- Versions -->
 [unreleased]: https://github.com/rimij405/r-capstone-code/compare/v0.0.2...HEAD
+<!-- [0.0.3]: https://github.com/rimij405/r-capstone-code/releases/v0.0.3 -->
 [0.0.2]: https://github.com/rimij405/r-capstone-code/compare/v0.0.1-alpha.1...v0.0.2
 [0.0.1]: https://github.com/rimij405/r-capstone-code/releases/tag/v0.0.1-alpha.1
+
+<!-- MarkdownLint Configuration -->
+<!-- markdownlint-disable-file MD024 -->
