@@ -6,3 +6,16 @@
 ^LICENSE\.md$
 ^README\.Rmd$
 ^cran-comments\.md$
+^venv$
+^bin$
+^\.python-version$
+^\.github$
+^\.vscode$
+^\.pre-commit-config.yaml$
+^rcmdcheck.log$
+^\.lintr$
+^(inst/)?CITATION(.cff)?$
+^_targets(.R)?$
+^CHANGELOG.md$
+^LICENSE-DOCS$
+^requirements.in$
