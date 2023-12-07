@@ -5,14 +5,24 @@
 # See https://books.ropensci.org/targets/hpc.html
 # to learn about your options.
 
+# Set the script path.
+box::set_script_path(file.path(getwd(), "DSCI799CapstoneIAE2784"))
+
 # Load the targets and visNetwork modules.
 box::use(
-    targets = targets[tar_visnetwork],
-    network = visNetwork[visSave]
+    here[path.resolve = here],
+    targets[tar_visnetwork],
+    visNetwork[visSave],
+    config = ./src/config,
 )
+
+# Get the configuration details.
+.settings <- config$app()
 
 # Define options for the network graph.
 options <- list(
+    targets_only = TRUE,
+    callr_function = NULL,
     outdated = TRUE,
     zoom_speed = 2,
     physics = TRUE
@@ -20,11 +30,11 @@ options <- list(
 
 # Create the graph.
 print("Generating the graph...")
-output <- do.call(targets$tar_visnetwork, options)
+output <- do.call(tar_visnetwork, options)
 
 # Create the output path name.
 output_timestamp <- format(Sys.time(), "%Y-%m-%dT%H_%M")
-output_basename <- Sys.getenv("VISNETWORK_GRAPH_TITLE", "visnetwork-graph")
+output_basename <- .settings["GRAPH_TITLE"]
 output_ext <- ".html"
 output_path <- paste(
     output_basename,
@@ -34,11 +44,17 @@ output_path <- paste(
 )
 
 # Get the full filepath.
-output_path <- file.path("_targets/reports/", output_path)
+output_dir <- path.resolve("_targets/reports")
+output_path <- file.path(output_dir, output_path)
+
+# Ensure directory exists.
+if (! dir.exists(output_dir)) {
+    dir.create(output_dir, recursive = TRUE, mode = "0755")
+}
 
 # Save the graph.
 print(paste("Saving the graph to:", output_path))
-network$visSave(graph = output, file = output_path)
+visSave(graph = output, file = output_path, background = "#d2d2d2")
 
 # Check if missing.
 if (! file.exists(output_path)) {
