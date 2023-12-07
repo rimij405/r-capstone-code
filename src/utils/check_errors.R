@@ -1,3 +1,8 @@
+#' @family src/utils
+#' @name utils[check_errors]
+#' @title check_errors()
+#'
+#' @description
 #' Check if the specified error list contains non-NULL messages.
 #'
 #' @param e
@@ -6,7 +11,6 @@
 #' Context of the errors being checked. Defaults to the calling function name.
 #'
 #' @return Returns zero invisibly when no errors are found.
-#'
 #' @export
 check_errors <- function(e = c(), ctx = NULL) {
     # Get the context.

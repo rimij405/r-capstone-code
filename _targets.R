@@ -4,17 +4,18 @@
 
 # nolint start: commented_code_linter, trailing_whitespace_linter.
 
-# Import pipeline utilities:
+# Import required {targets} workflow API:
 box::use(
     tools,
     targets[tar_option_set, tar_target],
     tarchetypes[tar_plan],
 )
 
-# Import pipeline transforms.
+# Import custom utilties:
 box::use(
-    . / src / utils,
-    . / src / func / use_extdata[use_extdata]
+    src / config[config.app = app],
+    src / func / use_extdata[...],
+    src / utils / check_errors[...]
 )
 
 # Set target options:

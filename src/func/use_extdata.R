@@ -1,5 +1,7 @@
 # nolint start: line_length_linter.
-#' use_extdata
+#' @family src/func
+#' @name func/use_extdata[use_extdata]
+#' @title use_extdata()
 #'
 #' @description
 #' Place a copy of the external dataset into another directory.
@@ -8,8 +10,9 @@
 #' @param output_dir        Relative or absolute path pointing to the destination directory.
 #' @param output_basename   Filename (with extension) applied to the output file. Defaults to the original file's basename.
 #'
+#' @importFrom tools file_path_as_absolute
+#'
 #' @return      Returns zero invisibly when no errors are found.
-#' @export
 # nolint end
 use_extdata <- function(extdata_file = NULL,
                         output_dir = "data/raw",
