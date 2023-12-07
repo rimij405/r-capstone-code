@@ -1,7 +1,7 @@
- # nolint start
+
 local({
 
-  # the requested version of renv
+  # the requested version of renv # nolint
   version <- "1.0.3"
   attr(version, "sha") <- NULL
 
@@ -1178,4 +1178,3 @@ local({
   invisible()
 
 })
-# nolint end

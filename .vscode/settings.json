@@ -15,7 +15,8 @@
         "package"
     ],
     "editor.tokenColorCustomizations": {
-        "textMateRules": []
+        "textMateRules": [],
+        "comments": ""
     },
     "python.terminal.activateEnvironment": false,
     "python.terminal.activateEnvInCurrentTerminal": false

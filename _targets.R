@@ -8,13 +8,13 @@
 box::use(
     tools,
     targets[tar_option_set, tar_target],
-    tarchetypes[tar_plan],
+    tarchetypes[...],
 )
 
 # Import custom utilties:
 box::use(
     src / config[config.app = app],
-    src / func / use_extdata[...],
+    src / func / copy_extdata[...],
     src / utils / check_errors[...]
 )
 
@@ -42,19 +42,35 @@ tar_option_set(
     #     = "module load R" )
     #
     # Set other options as needed.
+    # debug = "rawdata_regents"
 )
 
+# nolint start: line_length_linter
 # Create the pipeline.
 tar_plan(
-    # External Data Inputs
-    uri_regents = "inst/extdata/2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx", # nolint: line_length_linter.
-    uri_streeteasy_rents = "inst/extdata/medianAskingRent_All.zip",
-    uri_zillow_index = "inst/extdata/Zip_zori_uc_sfrcondomfr_sm_month.csv",
-    uri_modzcta = "inst/extdata/MODZCTA_20231206.geojson",
-    uri_nycha_developments = "inst/extdata/NYCHA_developments_20231206.geojson",
-    uri_nycha_address = "inst/extdata/NYCHA_Residential_Addresses_20231206.csv",
-    uri_schma = "inst/extdata/schma.zip",
-    uri_vacany = "inst/extdata/vacant_puf_21.csv",
+    # 1. Get list of external data file paths.
+    extdata_relpaths = list(
+        schma = "data/external/schma.zip",
+        regents_scores = "data/external/2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx",
+        streeteasy_rents = "data/external/medianAskingRent_All.zip",
+        zillow_index = "data/external/Zip_zori_uc_sfrcondomfr_sm_month.csv",
+        modzcta = "data/external/MODZCTA_20231206.geojson",
+        nycha_developments = "data/external/NYCHA_developments_20231206.geojson",
+        nycha_addresses = "data/external/NYCHA_Residential_Addresses_20231206.csv",
+        vacancies = "data/external/vacant_puf_21.csv"
+    ),
+
+    # 2. Create a copy of each external data file and place it in `data/raw`.
+    tar_target(
+        name = rawdata_relpaths,
+        command = copy_extdata(unlist(extdata_relpaths[1]), names(extdata_relpaths[1])),
+        pattern = map(extdata_relpaths)
+    )
+
+    # 3.
+
+
+    # Populate data/raw
 
     # # Raw Data Preparation
     # list(
@@ -65,6 +81,7 @@ tar_plan(
     #     )
     # ),
 )
+# nolint end
 
 # # Replace the target list below with your own:
 # list(
