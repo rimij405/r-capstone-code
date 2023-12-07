@@ -5,4 +5,4 @@ CITATION.cff
 extdata/*
 
 !extdata/README.md
-!extdata/*:Zone.Identifier
+!extdata/*Zone.Identifier
