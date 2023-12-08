@@ -2,8 +2,6 @@
 # script. Then follow the manual to check and run the pipeline:
 # https://books.ropensci.org/targets/walkthrough.html#inspect-the-pipeline
 
-# nolint start: commented_code_linter, trailing_whitespace_linter.
-
 # Import required {targets} workflow API:
 box::use(
     tools,
@@ -47,10 +45,11 @@ tar_option_set(
     # debug = "rawdata_regents"
 )
 
+# nolint start: line_length_linter
 #' Dictionary of relative paths to external dataset files.
 extdata_paths_list <- list(
     schma = "data/external/schma.zip",
-    regents_scores = "data/external/2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx", # nolint: line_length_linter.
+    regents_scores = "data/external/2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx",
     streeteasy_rents = "data/external/medianAskingRent_All.zip",
     zillow_index = "data/external/Zip_zori_uc_sfrcondomfr_sm_month.csv",
     modzcta = "data/external/MODZCTA_20231206.geojson",
@@ -59,10 +58,7 @@ extdata_paths_list <- list(
     vacancies = "data/external/vacant_puf_21.csv"
 )
 
-
-
-# nolint start: line_length_linter
-## prepare ---
+# Create the workflow pipeline.
 tar_plan(
 
     # Input file paths as their own target.
@@ -90,11 +86,12 @@ tar_plan(
     )
 
     # # 3. Map each raw data item into a 'staged' format ready for analysis.
-    # tar_target(
-    #     name = staged_index,
-    #     command =
-
-
+    # tar_files(
+    #     staged_index,
+    #     command = create_staged_index(rawdata_index),
+    #     format = "file_fast",
+    #     repository = "local",
+    #     error = "stop"
     # )
 
 
@@ -109,61 +106,4 @@ tar_plan(
     #     )
     # ),
 )
-# nolint end
-
-# # Replace the target list below with your own:
-# list(
-#     tar_target(
-#     ),
-#     # tar_target(
-#     #     name = raw_regents_xlsx,
-#     #     command = copy_file("2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx"), # nolint: line_length_linter.
-#     #     format = "file"
-#     # ),
-#     # tar_target(
-#     #     name = raw_modzcta_geojson,
-#     #     command = copy_file("MODZCTA_20231206.geojson"), # nolint: line_length_linter.
-#     #     format = "file"
-#     # ),
-#     # tar_target(
-#     #     name = raw_nycha_developments_geojson,
-#     #     command = copy_file("NYCHA_developments_20231206.geojson"), # nolint: line_length_linter.
-#     #     format = "file"
-#     # ),
-#     # tar_target(
-#     #     name = raw_,
-#     #     command = copy_file("NYCHA_Residential_Addresses_20231206.csv"), # nolint: line_length_linter.
-#     #     format = "file"
-#     # ),
-#     # tar_target(
-#     #     name = data_,
-#     #     command = copy_file(""), # nolint: line_length_linter.
-#     #     format = "file"
-#     # ),
-#     # tar_target(
-#     #     name = data_,
-#     #     command = copy_file(""), # nolint: line_length_linter.
-#     #     format = "file"
-#     # ),
-#     # tar_target(
-#     #     name = data_,
-#     #     command = copy_file(""), # nolint: line_length_linter.
-#     #     format = "file"
-#     # ),
-#     # tar_target(
-#     #     name = data_,
-#     #     command = copy_file(""), # nolint: line_length_linter.
-#     #     format = "file"
-#     # ),
-#     # tar_target(
-#     #     name = data_,
-#     #     command = copy_file(""), # nolint: line_length_linter.
-#     #     format = "file"
-#     # ),
-#     # tar_target(
-#     #     name = data_regents,
-#     #     command = copy_file("2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx"), # nolint: line_length_linter.
-#     #     format = "file"
-#     # ),
-# )
 # nolint end
