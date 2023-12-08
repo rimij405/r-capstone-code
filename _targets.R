@@ -9,12 +9,14 @@ box::use(
     tools,
     targets[tar_option_set, tar_target],
     tarchetypes[...],
+    tibble[...]
 )
 
 # Import custom utilties:
 box::use(
     src / config[config.app = app],
     src / func / copy_extdata[...],
+    src / func / create_extdata_filename_tbl[...],
     src / utils / check_errors[...]
 )
 
@@ -45,35 +47,52 @@ tar_option_set(
     # debug = "rawdata_regents"
 )
 
+#' Dictionary of relative paths to external dataset files.
+extdata_paths_list <- list(
+    schma = "data/external/schma.zip",
+    regents_scores = "data/external/2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx", # nolint: line_length_linter.
+    streeteasy_rents = "data/external/medianAskingRent_All.zip",
+    zillow_index = "data/external/Zip_zori_uc_sfrcondomfr_sm_month.csv",
+    modzcta = "data/external/MODZCTA_20231206.geojson",
+    nycha_developments = "data/external/NYCHA_developments_20231206.geojson",
+    nycha_addresses = "data/external/NYCHA_Residential_Addresses_20231206.csv",
+    vacancies = "data/external/vacant_puf_21.csv"
+)
+
+
+
 # nolint start: line_length_linter
 ## prepare ---
 tar_plan(
-    ### data_ext_index
-    # 1. Create index of external data resource files.
-    data_ext_index = list(
-        schma = "data/external/schma.zip",
-        regents_scores = "data/external/2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx",
-        streeteasy_rents = "data/external/medianAskingRent_All.zip",
-        zillow_index = "data/external/Zip_zori_uc_sfrcondomfr_sm_month.csv",
-        modzcta = "data/external/MODZCTA_20231206.geojson",
-        nycha_developments = "data/external/NYCHA_developments_20231206.geojson",
-        nycha_addresses = "data/external/NYCHA_Residential_Addresses_20231206.csv",
-        vacancies = "data/external/vacant_puf_21.csv"
+
+    # Input file paths as their own target.
+    extdata_filename_tbl = create_extdata_filename_tbl(
+        extdata_paths_list
     ),
 
-    # 2. Clone each extdata_index item into the `data/raw` directory.
+    # Create upstream/downstream targets when iterating over filepaths.
+    tar_files_input(
+        extdata_index,
+        unlist(extdata_paths_list),
+        format = "file_fast",
+        repository = "local",
+        error = "stop"
+    ),
+
+    # Clone each extdata_index item into the `data/raw` directory.
     tar_target(
-        name = data_raw_index,
+        name = rawdata_index,
         command = copy_extdata(
-            unlist(data_ext_index[1]),
-            names(data_ext_index[1])
+            unlist(extdata_index[1]),
+            find_extdata_id_by_path(extdata_filename_tbl, extdata_index[1])
         ),
-        pattern = map(data_ext_index)
+        pattern = map(extdata_index)
     )
 
     # # 3. Map each raw data item into a 'staged' format ready for analysis.
     # tar_target(
-    #     name = data_staged_index,
+    #     name = staged_index,
+    #     command =
 
 
     # )
