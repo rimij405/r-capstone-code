@@ -12,7 +12,8 @@
         "pre-commit",
         "config",
         "docs",
-        "package"
+        "package",
+        "pipeline"
     ],
     "editor.tokenColorCustomizations": {
         "textMateRules": [],

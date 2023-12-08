@@ -46,10 +46,11 @@ tar_option_set(
 )
 
 # nolint start: line_length_linter
-# Create the pipeline.
+## prepare ---
 tar_plan(
-    # 1. Get list of external data file paths.
-    extdata_relpaths = list(
+    ### data_ext_index
+    # 1. Create index of external data resource files.
+    data_ext_index = list(
         schma = "data/external/schma.zip",
         regents_scores = "data/external/2014-15-to-2021-22-nyc-regents-overall-and-by-category.xlsx",
         streeteasy_rents = "data/external/medianAskingRent_All.zip",
@@ -60,14 +61,22 @@ tar_plan(
         vacancies = "data/external/vacant_puf_21.csv"
     ),
 
-    # 2. Create a copy of each external data file and place it in `data/raw`.
+    # 2. Clone each extdata_index item into the `data/raw` directory.
     tar_target(
-        name = rawdata_relpaths,
-        command = copy_extdata(unlist(extdata_relpaths[1]), names(extdata_relpaths[1])),
-        pattern = map(extdata_relpaths)
+        name = data_raw_index,
+        command = copy_extdata(
+            unlist(data_ext_index[1]),
+            names(data_ext_index[1])
+        ),
+        pattern = map(data_ext_index)
     )
 
-    # 3.
+    # # 3. Map each raw data item into a 'staged' format ready for analysis.
+    # tar_target(
+    #     name = data_staged_index,
+
+
+    # )
 
 
     # Populate data/raw

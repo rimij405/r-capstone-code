@@ -15,9 +15,9 @@
 #' @return      Returns zero invisibly when no errors are found.
 # nolint end
 copy_extdata <- function(extdata_file = NULL,
-                         extdata_target = NULL,
+                         extdata_target = basename(extdata_file),
                          output_dir = "data/raw",
-                         output_basename = basename(extdata_file),
+                         output_basename = extdata_target,
                          options = list(
                              overwrite = TRUE,
                              copy.mode = TRUE
@@ -43,8 +43,11 @@ copy_extdata <- function(extdata_file = NULL,
     # Get the input file path.
     input_path <- file_path_as_absolute(extdata_file) # nolint: object_usage_linter line_length_linter
 
+    # Get the extension.
+    output_filename <- sprintf("%s.%s", output_basename, file_ext(input_path))
+
     # Get the output file path.
-    output_path <- file.path(output_dir, output_basename)
+    output_path <- file.path(output_dir, output_filename)
 
     # Perform the copy.
     file.copy(input_path, output_path)
@@ -60,7 +63,8 @@ copy_extdata <- function(extdata_file = NULL,
         id = extdata_target,
         filename = basename(output_file),
         filetype = file_ext(output_file),
-        raw_path = output_file
+        filepath = output_file,
+        source = basename(input_path)
     )
 
     # Return the name.
